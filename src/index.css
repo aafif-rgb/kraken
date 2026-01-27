@@ -1,0 +1,74 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Brand Colors - Kraken Brand Palette */
+  /* PRIMARY COLORS */
+  --cinnabar: #ED301C;
+  --dark-cyan: #00969C;
+  --cornsilk: #F9F0D1;
+  --white: #FFFFFF;
+  
+  /* SECONDARY COLORS */
+  --black: #000000;
+  
+  /* Derived Colors */
+  --primary-dark: #0A0A0A;
+  --primary-black: var(--black);
+  --accent-primary: var(--cinnabar);
+  --accent-secondary: var(--dark-cyan);
+  --accent-highlight: var(--cornsilk);
+  --text-primary: var(--white);
+  --text-secondary: #888888;
+  --text-muted: #555555;
+  --border-color: #0F0F0F;
+  
+  /* Ominous effects */
+  --glow-cinnabar: rgba(237, 48, 28, 0.4);
+  --glow-cyan: rgba(0, 150, 156, 0.3);
+  --shadow-deep: rgba(0, 0, 0, 0.8);
+  
+  /* Typography - Kraken Brand Guidelines */
+  /* Primary: Regular Dense (using Space Grotesk as dense alternative) */
+  --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  /* Secondary: Karla */
+  --font-body: 'Karla', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-bold: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--primary-black);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Removed ambient animation - too playful for brand guidelines */
+
+html {
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--primary-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--cinnabar);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--dark-cyan);
+}
