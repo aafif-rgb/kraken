@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './Header.css'
 
-const Header = ({ isScrolled }) => {
+const Header = ({ isScrolled, isInHero }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const scrollToSection = (id) => {
@@ -13,9 +13,9 @@ const Header = ({ isScrolled }) => {
   }
 
   return (
-    <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
+    <header className={`header ${isScrolled ? 'scrolled' : ''} ${isInHero ? 'in-hero' : ''}`}>
       <div className="header-container">
-        <div className="logo" onClick={() => scrollToSection('hero')}>
+        <div className={`logo ${isInHero ? 'hidden' : 'visible'}`} onClick={() => scrollToSection('hero')}>
           <img src="/Kraken.svg" alt="Kraken" className="logo-image" />
         </div>
         

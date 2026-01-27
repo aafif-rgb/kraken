@@ -26,9 +26,21 @@
 
 .logo {
   cursor: pointer;
-  transition: transform 0.5s ease;
+  transition: transform 0.5s ease, opacity 0.6s ease, visibility 0.6s ease;
   display: flex;
   align-items: center;
+}
+
+.logo.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.logo.visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
 }
 
 .logo:hover {

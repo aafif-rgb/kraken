@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import './Hero.css'
 
-const Hero = () => {
+const Hero = ({ isInHero }) => {
   const heroRef = useRef(null)
   const videoRef = useRef(null)
   const [showContent, setShowContent] = useState(false)
@@ -97,7 +97,7 @@ const Hero = () => {
         <div className="hero-video-overlay"></div>
       </div>
       <div className={`hero-content ${showContent ? 'visible' : ''}`}>
-        <div className="hero-logo-wrapper">
+        <div className={`hero-logo-wrapper ${showContent && isInHero ? 'visible' : 'hidden'}`}>
           <img src="/Kraken2.svg" alt="Kraken" className="hero-logo" />
         </div>
         <h1 className="hero-title">

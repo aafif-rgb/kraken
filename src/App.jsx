@@ -11,12 +11,21 @@ import './App.css'
 function App() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [scrollProgress, setScrollProgress] = useState(0)
+  const [isInHero, setIsInHero] = useState(true)
   const isScrolling = useRef(false)
   const scrollTimeout = useRef(null)
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50)
+      
+      // Check if we're in the hero section
+      const heroSection = document.getElementById('hero')
+      if (heroSection) {
+        const heroBottom = heroSection.offsetTop + heroSection.offsetHeight
+        const scrollPosition = window.scrollY + window.innerHeight / 2
+        setIsInHero(scrollPosition < heroBottom)
+      }
       
       // Calculate scroll progress
       const windowHeight = document.documentElement.scrollHeight - window.innerHeight
@@ -164,8 +173,8 @@ function App() {
   return (
     <div className="App">
       <div className="scroll-progress" style={{ width: `${scrollProgress}%` }}></div>
-      <Header isScrolled={isScrolled} />
-      <Hero />
+      <Header isScrolled={isScrolled} isInHero={isInHero} />
+      <Hero isInHero={isInHero} />
       <Services />
       <Portfolio />
       <About />
