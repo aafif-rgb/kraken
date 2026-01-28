@@ -43,34 +43,40 @@ function App() {
   // Section-by-section scroll snapping
   useEffect(() => {
     const sections = document.querySelectorAll('section, footer.footer')
-    let currentSectionIndex = 0
-    const snapThreshold = 100 // pixels from top/bottom to trigger snap
+    let wheelTimeout = null
+    let wheelDelta = 0
+    const scrollDelay = 150
+    const minWheelDelta = 30
 
     const findCurrentSection = () => {
-      const scrollPosition = window.scrollY
+      const scrollY = window.scrollY
+      const viewportCenter = scrollY + window.innerHeight / 2
+      
+      let closestIndex = 0
+      let closestDistance = Infinity
+      
       for (let i = 0; i < sections.length; i++) {
         const section = sections[i]
         const sectionTop = section.offsetTop
-        const sectionBottom = sectionTop + section.offsetHeight
+        const sectionCenter = sectionTop + section.offsetHeight / 2
+        const distance = Math.abs(viewportCenter - sectionCenter)
         
-        if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
-          return i
+        if (distance < closestDistance) {
+          closestDistance = distance
+          closestIndex = i
         }
       }
-      return 0
+      
+      return closestIndex
     }
 
-    const scrollToSection = (index, position = 'top') => {
+    const scrollToSection = (index) => {
       if (index < 0 || index >= sections.length) return
+      if (isScrolling.current) return
       
       isScrolling.current = true
       const section = sections[index]
-      let scrollTarget = section.offsetTop
-      
-      // If scrolling to bottom of section
-      if (position === 'bottom') {
-        scrollTarget = section.offsetTop + section.offsetHeight - window.innerHeight
-      }
+      const scrollTarget = Math.max(0, section.offsetTop)
       
       window.scrollTo({
         top: scrollTarget,
@@ -82,7 +88,7 @@ function App() {
       }
       scrollTimeout.current = setTimeout(() => {
         isScrolling.current = false
-      }, 800)
+      }, 1200)
     }
 
     const handleWheel = (e) => {
@@ -91,69 +97,48 @@ function App() {
         return
       }
 
-      const scrollY = window.scrollY
-      const windowHeight = window.innerHeight
-      currentSectionIndex = findCurrentSection()
-      
-      if (currentSectionIndex === -1) return
-      
-      const currentSection = sections[currentSectionIndex]
-      const sectionTop = currentSection.offsetTop
-      const sectionBottom = sectionTop + currentSection.offsetHeight
-      const sectionHeight = currentSection.offsetHeight
-      const distanceFromTop = scrollY - sectionTop
-      const distanceFromBottom = sectionBottom - (scrollY + windowHeight)
-      
       const deltaY = e.deltaY
-      const isScrollingDown = deltaY > 0
-      const isScrollingUp = deltaY < 0
-
-      // If section is taller than viewport, allow normal scrolling unless near edges
-      if (sectionHeight > windowHeight) {
-        // Near top of section and scrolling up - go to previous section
-        if (isScrollingUp && distanceFromTop < snapThreshold && currentSectionIndex > 0) {
-          e.preventDefault()
-          scrollToSection(currentSectionIndex - 1, 'bottom')
-          return
-        }
-        
-        // Near bottom of section and scrolling down - go to next section
-        if (isScrollingDown && distanceFromBottom < snapThreshold && currentSectionIndex < sections.length - 1) {
-          e.preventDefault()
-          scrollToSection(currentSectionIndex + 1, 'top')
-          return
-        }
-        
-        // Allow normal scrolling within the section
-        return
-      } else {
-        // Section fits in viewport - snap to next/previous
-        if (isScrollingDown && currentSectionIndex < sections.length - 1) {
-          e.preventDefault()
-          scrollToSection(currentSectionIndex + 1)
-        } else if (isScrollingUp && currentSectionIndex > 0) {
-          e.preventDefault()
-          scrollToSection(currentSectionIndex - 1)
-        }
+      wheelDelta += deltaY
+      
+      if (wheelTimeout) {
+        clearTimeout(wheelTimeout)
       }
+
+      wheelTimeout = setTimeout(() => {
+        if (Math.abs(wheelDelta) < minWheelDelta) {
+          wheelDelta = 0
+          return
+        }
+
+        const currentSectionIndex = findCurrentSection()
+        const isScrollingDown = wheelDelta > 0
+        let targetIndex = currentSectionIndex
+
+        if (isScrollingDown && currentSectionIndex < sections.length - 1) {
+          targetIndex = currentSectionIndex + 1
+        } else if (!isScrollingDown && currentSectionIndex > 0) {
+          targetIndex = currentSectionIndex - 1
+        }
+
+        if (targetIndex !== currentSectionIndex) {
+          e.preventDefault()
+          scrollToSection(targetIndex)
+        }
+
+        wheelDelta = 0
+      }, scrollDelay)
     }
 
     const handleKeyDown = (e) => {
       if (isScrolling.current) return
+      if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return
 
-      currentSectionIndex = findCurrentSection()
-      if (currentSectionIndex === -1) return
+      e.preventDefault()
+      const currentSectionIndex = findCurrentSection()
 
-      const currentSection = sections[currentSectionIndex]
-      const sectionHeight = currentSection.offsetHeight
-      const windowHeight = window.innerHeight
-
-      // For keyboard, always snap to next/previous section
       if (e.key === 'ArrowDown' && currentSectionIndex < sections.length - 1) {
-        e.preventDefault()
         scrollToSection(currentSectionIndex + 1)
       } else if (e.key === 'ArrowUp' && currentSectionIndex > 0) {
-        e.preventDefault()
         scrollToSection(currentSectionIndex - 1)
       }
     }
@@ -164,6 +149,9 @@ function App() {
     return () => {
       window.removeEventListener('wheel', handleWheel)
       window.removeEventListener('keydown', handleKeyDown)
+      if (wheelTimeout) {
+        clearTimeout(wheelTimeout)
+      }
       if (scrollTimeout.current) {
         clearTimeout(scrollTimeout.current)
       }

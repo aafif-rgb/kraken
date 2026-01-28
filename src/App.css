@@ -86,9 +86,6 @@
 section {
   padding: 120px 0;
   position: relative;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
-  scroll-margin-top: 0;
 }
 
 @media (max-width: 768px) {

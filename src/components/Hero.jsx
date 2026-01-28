@@ -92,7 +92,7 @@ const Hero = ({ isInHero }) => {
           loop
           playsInline
         >
-          <source src="/videos/hero-background.mp4" type="video/mp4" />
+          <source src="/Kraken.mp4" type="video/mp4" />
         </video>
         <div className="hero-video-overlay"></div>
       </div>
