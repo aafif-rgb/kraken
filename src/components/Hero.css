@@ -1,11 +1,14 @@
 .hero {
+  height: 100vh;
   min-height: 100vh;
+  max-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   overflow: hidden;
-  padding-top: 80px;
+  padding: 80px 0 60px;
+  box-sizing: border-box;
   background: #000000;
 }
 
@@ -28,7 +31,7 @@
   min-height: 100%;
   width: auto;
   height: auto;
-  transform: translate(-50%, -50%) scale(0.85);
+  transform: translate(-50%, -50%) scale(0.5);
   object-fit: cover;
   z-index: 0;
 }
@@ -44,6 +47,27 @@
     radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.4) 0%, transparent 70%);
   z-index: 1;
   pointer-events: none;
+}
+
+.hero-water-droplets {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.hero-droplet {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.25));
+  box-shadow: 
+    0 0 8px rgba(255, 255, 255, 0.4),
+    inset -1px -1px 2px rgba(255, 255, 255, 0.2);
+  transform: translate(-50%, -50%);
 }
 
 .hero-gradient {
@@ -113,7 +137,7 @@
 
 .hero-content {
   text-align: center;
-  z-index: 2;
+  z-index: 3;
   max-width: 1200px;
   padding: 0 40px;
   opacity: 0;
@@ -159,7 +183,7 @@
   font-size: clamp(32px, 6vw, 72px);
   font-weight: 700;
   line-height: 1.1;
-  margin-bottom: 0;
+  margin-bottom: 40px;
   letter-spacing: 4px;
   text-transform: uppercase;
   font-family: var(--font-display);
@@ -307,42 +331,6 @@
   transition: all 0.4s ease;
   /* Cyan used subtly, not dominant */
 }
-
-.hero-scroll-indicator {
-  position: absolute;
-  bottom: 40px;
-  left: 50%;
-  transform: translateX(-50%);
-  opacity: 0;
-  transition: opacity 1s ease-out 1s;
-  z-index: 2;
-  pointer-events: none;
-}
-
-.hero-scroll-indicator.visible {
-  opacity: 1;
-  animation: bounce 3s ease-in-out infinite;
-}
-
-.scroll-arrow {
-  width: 20px;
-  height: 20px;
-  border-right: 2px solid var(--text-primary);
-  border-bottom: 2px solid var(--text-primary);
-  transform: rotate(45deg);
-  opacity: 0.6;
-  /* Minimal - no glow */
-}
-
-@keyframes bounce {
-  0%, 100% {
-    transform: translateX(-50%) translateY(0);
-  }
-  50% {
-    transform: translateX(-50%) translateY(5px);
-  }
-}
-/* Slower, more deliberate - 3s instead of 2s */
 
 @media (max-width: 768px) {
   .hero {

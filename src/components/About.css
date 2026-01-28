@@ -1,22 +1,30 @@
 .about {
-  background-color: #000000;
+  background-color: #111;
   position: relative;
-  /* Pure black - no gradients per brand guidelines */
+}
+
+.about .section-title {
+  color: var(--text-primary);
+}
+
+.about .section-title::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: var(--cinnabar);
+  margin-top: 12px;
+  box-shadow: 0 0 20px var(--glow-cinnabar);
+}
+
+.about .section-subtitle {
+  color: var(--text-secondary);
 }
 
 .about-container {
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 40px;
-}
-
-.section-title {
-  font-size: clamp(36px, 5vw, 64px);
-  font-weight: 700;
-  margin-bottom: 60px;
-  text-transform: uppercase;
-  letter-spacing: 4px;
-  font-family: var(--font-display);
 }
 
 .about-content {
@@ -61,12 +69,17 @@
 .stat-number {
   font-size: 48px;
   font-weight: 700;
-  color: var(--text-primary);
+  color: var(--cinnabar);
   margin-bottom: 10px;
   line-height: 1;
   font-family: var(--font-display);
   letter-spacing: 2px;
-  /* Minimal - white, no glow. Red used sparingly per guidelines - tilt handled by useTilt hook */
+  text-shadow: 0 0 30px var(--glow-cinnabar), 0 0 60px rgba(237, 48, 28, 0.2);
+  transition: text-shadow 0.4s ease;
+}
+
+.stat-item:hover .stat-number {
+  text-shadow: 0 0 40px var(--glow-cinnabar), 0 0 80px rgba(237, 48, 28, 0.35);
 }
 
 .stat-label {
@@ -83,15 +96,20 @@
 .about-image-placeholder {
   width: 100%;
   aspect-ratio: 4/3;
-  background-color: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--border-color);
+  background-color: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   overflow: hidden;
-  /* No hover effects - keeping minimal */
+  transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.about-image-placeholder:hover {
+  border-color: rgba(237, 48, 28, 0.4);
+  box-shadow: 0 0 30px rgba(237, 48, 28, 0.15), inset 0 0 60px rgba(237, 48, 28, 0.03);
 }
 
 .about-image-placeholder::before {
@@ -101,8 +119,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.3);
-  /* Minimal - no color gradients per guidelines */
+  background: rgba(0, 0, 0, 0.4);
 }
 
 .placeholder-content {
@@ -116,10 +133,10 @@
   height: 80px;
   display: block;
   margin-bottom: 20px;
-  color: var(--text-primary);
-  opacity: 0.3;
+  color: var(--cinnabar);
+  opacity: 0.85;
   stroke-width: 1.5;
-  /* Minimal - white, not red */
+  filter: drop-shadow(0 0 12px var(--glow-cinnabar));
 }
 
 .placeholder-content p {

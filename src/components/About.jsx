@@ -51,10 +51,13 @@ const About = () => {
 
   return (
     <section id="about" className="about" ref={aboutRef}>
+      <div className="section-title-hero" aria-hidden="true">About</div>
       <div className="about-container">
-        <div className="about-content">
+        <div className="section-header">
+          <h2 className="section-title">About</h2>
+        </div>
+        <div className="section-content about-content">
           <div className="about-text">
-            <h2 className="section-title">About</h2>
             <p className="about-description">
               A silent force. Unseen, powerful, intentional.
             </p>

@@ -41,7 +41,7 @@
 
 body {
   font-family: var(--font-body);
-  background-color: var(--primary-black);
+  background-color: #111;
   color: var(--text-primary);
   line-height: 1.6;
   overflow-x: hidden;

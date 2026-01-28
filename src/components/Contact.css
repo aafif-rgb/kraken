@@ -1,37 +1,30 @@
 .contact {
-  background-color: #000000;
+  background-color: #111;
   position: relative;
-  /* Pure black - no gradients per brand guidelines */
+}
+
+.contact .section-title {
+  color: var(--text-primary);
+}
+
+.contact .section-title::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: var(--cinnabar);
+  margin-top: 12px;
+  box-shadow: 0 0 20px var(--glow-cinnabar);
+}
+
+.contact .section-subtitle {
+  color: var(--text-secondary);
 }
 
 .contact-container {
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 40px;
-}
-
-.section-header {
-  text-align: center;
-  margin-bottom: 120px;
-}
-
-.section-title {
-  font-size: clamp(36px, 5vw, 64px);
-  font-weight: 700;
-  margin-bottom: 40px;
-  text-transform: uppercase;
-  letter-spacing: 4px;
-  font-family: var(--font-display);
-}
-
-.section-subtitle {
-  font-size: 16px;
-  color: var(--text-secondary);
-  max-width: 400px;
-  margin: 0 auto;
-  font-family: var(--font-body);
-  font-weight: 400;
-  letter-spacing: 0.5px;
 }
 
 .contact-content {
@@ -52,6 +45,17 @@
   gap: 20px;
   align-items: flex-start;
   cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.contact-item:hover {
+  transform: translateX(6px);
+}
+
+.contact-item:hover .contact-icon {
+  border-color: rgba(237, 48, 28, 0.6);
+  box-shadow: 0 0 24px var(--glow-cinnabar), 0 0 48px rgba(237, 48, 28, 0.2);
+  color: var(--cinnabar);
 }
 
 .contact-icon {
@@ -61,18 +65,19 @@
   align-items: center;
   justify-content: center;
   background-color: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 0;
   flex-shrink: 0;
-  color: var(--text-primary);
-  opacity: 0.8;
-  /* Minimal - white, no red per guidelines - tilt handled by useTilt hook */
+  color: var(--cinnabar);
+  opacity: 0.95;
+  transition: border-color 0.4s ease, box-shadow 0.4s ease, color 0.4s ease;
 }
 
 .contact-icon-svg {
   width: 24px;
   height: 24px;
   stroke-width: 2;
+  filter: drop-shadow(0 0 8px rgba(237, 48, 28, 0.5));
 }
 
 .contact-item h3 {
@@ -102,20 +107,19 @@
 .form-group textarea {
   width: 100%;
   padding: 16px 20px;
-  background-color: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--border-color);
+  background-color: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 0;
   color: var(--text-primary);
   font-size: 16px;
   font-family: var(--font-body);
-  transition: all 0.6s ease;
-  /* Clean edges, slower transitions */
+  transition: all 0.4s ease;
 }
 
 .form-group input:hover,
 .form-group textarea:hover {
   background-color: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 .form-group input::placeholder,
@@ -126,15 +130,22 @@
 .form-group input:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: var(--text-primary);
-  background-color: rgba(255, 255, 255, 0.1);
-  transform: translateY(-2px);
-  /* Minimal - white border, no glow. Red used sparingly */
+  border-color: var(--cinnabar);
+  background-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 0 2px rgba(237, 48, 28, 0.2), 0 0 30px rgba(237, 48, 28, 0.15);
 }
 
 .form-group textarea {
   resize: vertical;
   min-height: 150px;
+}
+
+.contact .btn-primary {
+  box-shadow: 0 0 20px rgba(237, 48, 28, 0.3), 0 0 40px rgba(237, 48, 28, 0.15);
+}
+
+.contact .btn-primary:hover {
+  box-shadow: 0 0 30px var(--glow-cinnabar), 0 0 60px rgba(237, 48, 28, 0.25);
 }
 
 @media (max-width: 968px) {

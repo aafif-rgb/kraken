@@ -1,10 +1,22 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import './Hero.css'
+
+const DROPLET_COUNT = 22
 
 const Hero = ({ isInHero }) => {
   const heroRef = useRef(null)
   const videoRef = useRef(null)
   const [showContent, setShowContent] = useState(false)
+
+  const droplets = useMemo(() => {
+    return Array.from({ length: DROPLET_COUNT }, (_, i) => ({
+      id: i,
+      left: Math.random() * 100,
+      top: Math.random() * 100,
+      size: 3 + Math.random() * 5,
+      opacity: 0.35 + Math.random() * 0.4,
+    }))
+  }, [])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -95,6 +107,21 @@ const Hero = ({ isInHero }) => {
           <source src="/Kraken.mp4" type="video/mp4" />
         </video>
         <div className="hero-video-overlay"></div>
+        <div className="hero-water-droplets" aria-hidden="true">
+          {droplets.map((d) => (
+            <span
+              key={d.id}
+              className="hero-droplet"
+              style={{
+                left: `${d.left}%`,
+                top: `${d.top}%`,
+                width: `${d.size}px`,
+                height: `${d.size}px`,
+                opacity: d.opacity,
+              }}
+            />
+          ))}
+        </div>
       </div>
       <div className={`hero-content ${showContent ? 'visible' : ''}`}>
         <div className={`hero-logo-wrapper ${showContent && isInHero ? 'visible' : 'hidden'}`}>
@@ -121,9 +148,6 @@ const Hero = ({ isInHero }) => {
             Contact
           </button>
         </div>
-      </div>
-      <div className={`hero-scroll-indicator ${showContent ? 'visible' : ''}`}>
-        <div className="scroll-arrow"></div>
       </div>
     </section>
   )

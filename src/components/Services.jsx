@@ -89,6 +89,7 @@ const Services = () => {
 
   return (
     <section id="services" className="services" ref={servicesRef}>
+      <div className="section-title-hero" aria-hidden="true">Services</div>
       <div className="services-container">
         <div className="section-header">
           <h2 className="section-title">Services</h2>
@@ -96,6 +97,7 @@ const Services = () => {
             We create impact.
           </p>
         </div>
+        <div className="section-content">
         <div className="services-grid">
           {services.map((service, index) => {
             const IconComponent = service.Icon
@@ -119,6 +121,7 @@ const Services = () => {
               </TiltedCard>
             )
           })}
+        </div>
         </div>
       </div>
     </section>

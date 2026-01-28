@@ -1,6 +1,6 @@
 .App {
   min-height: 100vh;
-  background-color: var(--primary-black);
+  background-color: #111;
   position: relative;
   z-index: 1;
 }
@@ -86,6 +86,108 @@
 section {
   padding: 120px 0;
   position: relative;
+  background-color: #111;
+}
+
+/* Shared section header styles - single source of truth */
+.section-header {
+  text-align: left;
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.section-title {
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 700;
+  margin-bottom: 0;
+  margin-right: 0;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-family: var(--font-display);
+  writing-mode: horizontal-tb; /* title on left, written horizontally */
+}
+
+.section-subtitle {
+  font-size: 16px;
+  color: var(--text-secondary);
+  max-width: 400px;
+  margin: 0;
+  font-family: var(--font-body);
+  font-weight: 400;
+  letter-spacing: 0.5px;
+}
+
+/* Big centered hero title - shows first, then fades away */
+.section-title-hero {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: clamp(72px, 18vw, 200px);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  font-family: var(--font-display);
+  color: var(--text-primary);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 2;
+  white-space: nowrap;
+}
+
+section.section-in-view .section-title-hero {
+  animation: sectionHeroTitle 2.2s ease forwards;
+}
+
+@keyframes sectionHeroTitle {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.95);
+  }
+  8% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  35% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  55% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* Header (title on left, written horizontally) - appears while big title fades */
+section .section-header {
+  opacity: 0;
+  transform: translateX(-24px);
+  transition: opacity 0.6s ease 0.75s, transform 0.6s ease 0.75s;
+}
+
+section.section-in-view .section-header {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Content - fades in while big title fades and left title appears */
+section .section-content {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s ease 0.75s, transform 0.7s ease 0.75s;
+}
+
+section.section-in-view .section-content {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 @media (max-width: 768px) {

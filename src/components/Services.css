@@ -1,37 +1,12 @@
 .services {
-  background-color: #000000;
+  background-color: #111;
   position: relative;
-  /* Pure black - no gradients per brand guidelines */
 }
 
 .services-container {
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 40px;
-}
-
-.section-header {
-  text-align: center;
-  margin-bottom: 120px;
-}
-
-.section-title {
-  font-size: clamp(36px, 5vw, 64px);
-  font-weight: 700;
-  margin-bottom: 40px;
-  text-transform: uppercase;
-  letter-spacing: 4px;
-  font-family: var(--font-display);
-}
-
-.section-subtitle {
-  font-size: 16px;
-  color: var(--text-secondary);
-  max-width: 400px;
-  margin: 0 auto;
-  font-family: var(--font-body);
-  font-weight: 400;
-  letter-spacing: 0.5px;
 }
 
 .services-grid {
@@ -41,8 +16,8 @@
 }
 
 .service-card {
-  background-color: rgba(0, 0, 0, 0.3);
-  border: 1px solid var(--border-color);
+  background-color: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   padding: 80px 50px;
   border-radius: 0;
   position: relative;
@@ -94,9 +69,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--text-primary);
-  opacity: 0.7;
-  /* Minimal - white icons, no glow */
+  color: var(--cinnabar);
+  opacity: 0.9;
+  /* Red hue to match card accent */
 }
 
 .service-icon-svg {
@@ -110,7 +85,7 @@
 .service-title {
   font-size: 20px;
   font-weight: 600;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
   position: relative;
   z-index: 1;
   font-family: var(--font-display);

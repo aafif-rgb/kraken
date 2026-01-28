@@ -53,6 +53,7 @@ const Contact = () => {
 
   return (
     <section id="contact" className="contact" ref={contactRef}>
+      <div className="section-title-hero" aria-hidden="true">Contact</div>
       <div className="contact-container">
         <div className="section-header">
           <h2 className="section-title">Contact</h2>
@@ -60,7 +61,7 @@ const Contact = () => {
             Let's start a conversation.
           </p>
         </div>
-        <div className="contact-content">
+        <div className="section-content contact-content">
           <div className="contact-info">
             <div className="contact-item">
               <div className="contact-icon">

@@ -81,6 +81,7 @@ const Portfolio = () => {
 
   return (
     <section id="portfolio" className="portfolio" ref={portfolioRef}>
+      <div className="section-title-hero" aria-hidden="true">Portfolio</div>
       <div className="portfolio-container">
         <div className="section-header">
           <h2 className="section-title">Portfolio</h2>
@@ -88,6 +89,7 @@ const Portfolio = () => {
             Real moments captured.
           </p>
         </div>
+        <div className="section-content">
         <div className="portfolio-grid">
           {portfolioItems.map((item, index) => (
             <TiltedCard
@@ -117,6 +119,7 @@ const Portfolio = () => {
               </div>
             </TiltedCard>
           ))}
+        </div>
         </div>
       </div>
     </section>
