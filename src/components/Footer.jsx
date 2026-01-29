@@ -16,7 +16,7 @@ const Footer = () => {
         <div className="footer-content">
           <div className="footer-section">
             <div className="footer-logo">
-              <div className="logo-text">KRAKEN</div>
+              <img src="/Kraken.svg" alt="Kraken" className="footer-logo-image" />
             </div>
             <p className="footer-description">
               Professional video production and photography services

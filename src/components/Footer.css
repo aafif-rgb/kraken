@@ -26,14 +26,15 @@
   flex-direction: column;
 }
 
-.footer-logo .logo-text {
-  font-size: 20px;
-  font-weight: 700;
-  letter-spacing: 6px;
-  color: var(--text-primary);
-  text-transform: uppercase;
+.footer-logo {
   margin-bottom: 30px;
-  font-family: var(--font-display);
+}
+
+.footer-logo-image {
+  height: 120px;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
 }
 
 .footer-description {

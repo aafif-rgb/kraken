@@ -108,7 +108,18 @@ section {
   text-transform: uppercase;
   letter-spacing: 4px;
   font-family: var(--font-display);
+  color: var(--text-primary);
   writing-mode: horizontal-tb; /* title on left, written horizontally */
+}
+
+.section-title::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: var(--cinnabar);
+  margin-top: 12px;
+  box-shadow: 0 0 20px var(--glow-cinnabar);
 }
 
 .section-subtitle {

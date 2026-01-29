@@ -3,20 +3,6 @@
   position: relative;
 }
 
-.contact .section-title {
-  color: var(--text-primary);
-}
-
-.contact .section-title::after {
-  content: '';
-  display: block;
-  width: 60px;
-  height: 3px;
-  background: var(--cinnabar);
-  margin-top: 12px;
-  box-shadow: 0 0 20px var(--glow-cinnabar);
-}
-
 .contact .section-subtitle {
   color: var(--text-secondary);
 }

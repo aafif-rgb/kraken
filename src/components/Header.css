@@ -6,13 +6,12 @@
   z-index: 1000;
   background-color: transparent;
   transition: all 0.3s ease;
-  padding: 20px 0;
+  padding: 12px 0;
 }
 
 .header.scrolled {
   background-color: transparent;
-  padding: 15px 0;
-  /* Keep transparent at all times - minimal styling */
+  padding: 10px 0;
 }
 
 .header-container {
@@ -48,11 +47,10 @@
 }
 
 .logo-image {
-  height: 120px;
+  height: 56px;
   width: auto;
   object-fit: contain;
   filter: brightness(0) invert(1);
-  /* Logo usage - exact, respecting clear space per brand guidelines - white color */
 }
 
 .nav {
@@ -65,7 +63,7 @@
   color: var(--text-primary);
   text-decoration: none;
   font-weight: 500;
-  font-size: 15px;
+  font-size: 13px;
   letter-spacing: 1px;
   text-transform: uppercase;
   transition: all 0.5s ease;
@@ -139,7 +137,7 @@
 
   .nav {
     position: fixed;
-    top: 70px;
+    top: 52px;
     left: 0;
     right: 0;
     background-color: rgba(10, 10, 10, 0.98);
