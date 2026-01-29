@@ -15,7 +15,8 @@ const TiltedCard = ({
   rotateAmplitude = 8,
   showMobileWarning = false,
   showTooltip = false,
-  captionText = ''
+  captionText = '',
+  background = null
 }) => {
   const ref = useRef(null)
 
@@ -78,6 +79,8 @@ const TiltedCard = ({
       {showMobileWarning && (
         <div className="tilted-card-mobile-alert">This effect is not optimized for mobile. Check on desktop.</div>
       )}
+
+      {background}
 
       <motion.div
         className="tilted-card-inner"

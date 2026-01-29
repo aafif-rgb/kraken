@@ -40,49 +40,59 @@ const Hero = ({ isInHero }) => {
   useEffect(() => {
     const video = videoRef.current
     let timer
-    
-    if (video) {
-      // Set video properties
+
+    const tryPlay = () => {
+      if (!video) return
       video.muted = true
-      video.loop = true
+      video.setAttribute('muted', '')
+      video.setAttribute('playsinline', '')
+      video.setAttribute('webkit-playsinline', '')
       video.playsInline = true
-      
-      // Try to play the video
       const playPromise = video.play()
-      
       if (playPromise !== undefined) {
         playPromise
           .then(() => {
-            // Video is playing, show content after 2 seconds
-            timer = setTimeout(() => {
-              setShowContent(true)
-            }, 2000)
+            timer = setTimeout(() => setShowContent(true), 2000)
           })
-          .catch(err => {
-            console.log('Video autoplay prevented:', err)
-            // Show content anyway after 2 seconds even if video doesn't play
-            timer = setTimeout(() => {
-              setShowContent(true)
-            }, 2000)
-          })
-      } else {
-        // Fallback: show content after 2 seconds
-        timer = setTimeout(() => {
-          setShowContent(true)
-        }, 2000)
+          .catch(() => {})
       }
-    } else {
-      // No video element, show content after 2 seconds
-      timer = setTimeout(() => {
-        setShowContent(true)
-      }, 2000)
     }
-    
-    // Cleanup function
+
+    const onUserInteraction = () => {
+      tryPlay()
+      document.removeEventListener('touchstart', onUserInteraction)
+      document.removeEventListener('touchend', onUserInteraction)
+      document.removeEventListener('click', onUserInteraction)
+    }
+
+    if (video) {
+      video.muted = true
+      video.loop = true
+      video.playsInline = true
+      video.setAttribute('playsinline', '')
+      video.setAttribute('webkit-playsinline', '')
+
+      tryPlay()
+
+      video.addEventListener('loadeddata', tryPlay, { once: true })
+      video.addEventListener('canplay', tryPlay, { once: true })
+
+      document.addEventListener('touchstart', onUserInteraction, { once: true, passive: true })
+      document.addEventListener('touchend', onUserInteraction, { once: true, passive: true })
+      document.addEventListener('click', onUserInteraction, { once: true })
+    }
+
+    timer = setTimeout(() => setShowContent(true), 2000)
+
     return () => {
-      if (timer) {
-        clearTimeout(timer)
+      clearTimeout(timer)
+      if (video) {
+        video.removeEventListener('loadeddata', tryPlay)
+        video.removeEventListener('canplay', tryPlay)
       }
+      document.removeEventListener('touchstart', onUserInteraction)
+      document.removeEventListener('touchend', onUserInteraction)
+      document.removeEventListener('click', onUserInteraction)
     }
   }, [])
 
@@ -103,6 +113,7 @@ const Hero = ({ isInHero }) => {
           muted
           loop
           playsInline
+          preload="auto"
         >
           <source src="/Kraken.mp4" type="video/mp4" />
         </video>

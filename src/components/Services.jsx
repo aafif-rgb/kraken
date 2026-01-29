@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
 import './Services.css'
-import TiltedCard from './TiltedCard'
 import { 
   VideoIcon, 
   CameraIcon, 
@@ -12,7 +11,19 @@ import {
 
 const Services = () => {
   const servicesRef = useRef(null)
+  const videoRefs = useRef([])
   const [hoveredIndex, setHoveredIndex] = useState(null)
+
+  useEffect(() => {
+    videoRefs.current.forEach((video, i) => {
+      if (!video) return
+      if (i === hoveredIndex) {
+        video.play().catch(() => {})
+      } else {
+        video.pause()
+      }
+    })
+  }, [hoveredIndex])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -58,32 +69,44 @@ const Services = () => {
     {
       title: 'Video Production',
       description: 'Cinematic storytelling. From concept to final cut.',
-      Icon: VideoIcon
+      Icon: VideoIcon,
+      videoSrc: '/videos/hero-background.mp4',
+      poster: null
     },
     {
       title: 'Photography',
       description: 'Documentary and editorial. Real moments captured.',
-      Icon: CameraIcon
+      Icon: CameraIcon,
+      videoSrc: '/Kraken.mp4',
+      poster: null
     },
     {
       title: 'Post-Production',
       description: 'Editing, color grading, visual effects.',
-      Icon: EditIcon
+      Icon: EditIcon,
+      videoSrc: '/videos/Post-Production.mp4',
+      poster: null
     },
     {
       title: 'Drone Services',
       description: 'Aerial perspectives. Unique angles.',
-      Icon: DroneIcon
+      Icon: DroneIcon,
+      videoSrc: '/videos/Drone.mp4',
+      poster: null
     },
     {
       title: 'Live Streaming',
       description: 'Professional production for events and broadcasts.',
-      Icon: BroadcastIcon
+      Icon: BroadcastIcon,
+      videoSrc: '/videos/Live-Stream.mp4',
+      poster: null
     },
     {
       title: 'Brand Content',
       description: 'Strategic storytelling that resonates.',
-      Icon: TargetIcon
+      Icon: TargetIcon,
+      videoSrc: '/videos/Product-Showcase.mp4',
+      poster: null
     }
   ]
 
@@ -102,23 +125,35 @@ const Services = () => {
           {services.map((service, index) => {
             const IconComponent = service.Icon
             return (
-              <TiltedCard
+              <div
                 key={index}
-                className="service-card"
-                scaleOnHover={1.02}
-                rotateAmplitude={8}
+                className="service-card-wrapper"
+                onMouseEnter={() => setHoveredIndex(index)}
+                onMouseLeave={() => setHoveredIndex(null)}
               >
-                <div 
-                  onMouseEnter={() => setHoveredIndex(index)}
-                  onMouseLeave={() => setHoveredIndex(null)}
-                >
-                  <div className="service-icon">
-                    <IconComponent className="service-icon-svg" />
+                <div className="service-card">
+                  {service.videoSrc && (
+                    <div className="service-card-media" aria-hidden="true">
+                      <video
+                        ref={(el) => { videoRefs.current[index] = el }}
+                        src={service.videoSrc}
+                        poster={service.poster || undefined}
+                        muted
+                        loop
+                        playsInline
+                        preload="metadata"
+                      />
+                    </div>
+                  )}
+                  <div className="service-card-content">
+                    <div className="service-icon">
+                      <IconComponent className="service-icon-svg" />
+                    </div>
+                    <h3 className="service-title">{service.title}</h3>
+                    <p className="service-description">{service.description}</p>
                   </div>
-                  <h3 className="service-title">{service.title}</h3>
-                  <p className="service-description">{service.description}</p>
                 </div>
-              </TiltedCard>
+              </div>
             )
           })}
         </div>
