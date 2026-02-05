@@ -103,6 +103,31 @@
   letter-spacing: 1px;
 }
 
+.portfolio-teaser-cta {
+  text-align: center;
+  margin-top: 48px;
+}
+
+.portfolio-teaser-link {
+  display: inline-block;
+  padding: 14px 32px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: var(--text-primary);
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-decoration: none;
+  transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+.portfolio-teaser-link:hover {
+  border-color: var(--cinnabar);
+  background-color: rgba(237, 48, 28, 0.1);
+  color: var(--text-primary);
+}
+
 @media (max-width: 768px) {
   .portfolio-container {
     padding: 0 20px;

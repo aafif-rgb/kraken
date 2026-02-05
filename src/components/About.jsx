@@ -3,7 +3,7 @@ import './About.css'
 import { CameraIcon } from './icons'
 import { useCounter } from '../hooks/useCounter'
 
-const About = () => {
+const About = ({ standalone = false }) => {
   const aboutRef = useRef(null)
   const [stat1, stat1Ref] = useCounter('500+')
   const [stat2, stat2Ref] = useCounter('10+')
@@ -51,15 +51,15 @@ const About = () => {
 
   return (
     <section id="about" className="about" ref={aboutRef}>
-      <div className="section-title-hero" aria-hidden="true">About</div>
+      {!standalone && <div className="section-title-hero" aria-hidden="true">About</div>}
       <div className="about-container">
         <div className="section-header">
-          <h2 className="section-title">About</h2>
+          <h2 className="section-title">{standalone ? 'The studio' : 'About'}</h2>
         </div>
         <div className="section-content about-content">
           <div className="about-text">
             <p className="about-description">
-              A silent force. Unseen, powerful, intentional.
+              We're a KSA-based team. A silent force—unseen, powerful, intentional.
             </p>
             <p className="about-description">
               We capture what others cannot see. Documentary and cinematic. 

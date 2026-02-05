@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
 import './Services.css'
 import { 
   VideoIcon, 
@@ -9,10 +10,11 @@ import {
   TargetIcon 
 } from './icons'
 
-const Services = () => {
+const Services = ({ standalone = false, limit }) => {
   const servicesRef = useRef(null)
   const videoRefs = useRef([])
   const [hoveredIndex, setHoveredIndex] = useState(null)
+  const isTeaser = typeof limit === 'number' && limit > 0
 
   useEffect(() => {
     videoRefs.current.forEach((video, i) => {
@@ -110,9 +112,11 @@ const Services = () => {
     }
   ]
 
+  const displayServices = isTeaser ? services.slice(0, limit) : services
+
   return (
-    <section id="services" className="services" ref={servicesRef}>
-      <div className="section-title-hero" aria-hidden="true">Services</div>
+    <section id="services" className={`services ${isTeaser ? 'services-teaser' : ''}`} ref={servicesRef}>
+      {!standalone && !isTeaser && <div className="section-title-hero" aria-hidden="true">Services</div>}
       <div className="services-container">
         <div className="section-header">
           <h2 className="section-title">Services</h2>
@@ -122,7 +126,7 @@ const Services = () => {
         </div>
         <div className="section-content">
         <div className="services-grid">
-          {services.map((service, index) => {
+          {displayServices.map((service, index) => {
             const IconComponent = service.Icon
             return (
               <div
@@ -157,6 +161,11 @@ const Services = () => {
             )
           })}
         </div>
+        {isTeaser && (
+          <div className="services-teaser-cta">
+            <Link to="/services" className="services-teaser-link">View all services</Link>
+          </div>
+        )}
         </div>
       </div>
     </section>

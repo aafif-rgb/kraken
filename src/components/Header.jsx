@@ -1,29 +1,30 @@
 import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { useLayout } from '../context/LayoutContext'
 import './Header.css'
 
-const Header = ({ isScrolled, isInHero }) => {
+const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const { isScrolled, isInHero } = useLayout()
+  const navigate = useNavigate()
 
-  const scrollToSection = (id) => {
-    const element = document.getElementById(id)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
-      setIsMenuOpen(false)
-    }
+  const goTo = (path) => {
+    navigate(path)
+    setIsMenuOpen(false)
   }
 
   return (
     <header className={`header ${isScrolled ? 'scrolled' : ''} ${isInHero ? 'in-hero' : ''}`}>
       <div className="header-container">
-        <div className={`logo ${isInHero ? 'hidden' : 'visible'}`} onClick={() => scrollToSection('hero')}>
+        <div className={`logo ${isInHero ? 'hidden' : 'visible'}`} onClick={() => goTo('/')} role="button" tabIndex={0} onKeyDown={(e) => e.key === 'Enter' && goTo('/')}>
           <img src="/Kraken.svg" alt="Kraken" className="logo-image" />
         </div>
         
         <nav className={`nav ${isMenuOpen ? 'open' : ''}`}>
-          <a href="#services" onClick={() => scrollToSection('services')}>Services</a>
-          <a href="#portfolio" onClick={() => scrollToSection('portfolio')}>Portfolio</a>
-          <a href="#about" onClick={() => scrollToSection('about')}>About</a>
-          <a href="#contact" onClick={() => scrollToSection('contact')}>Contact</a>
+          <Link to="/services" onClick={() => setIsMenuOpen(false)}>Services</Link>
+          <Link to="/portfolio" onClick={() => setIsMenuOpen(false)}>Portfolio</Link>
+          <Link to="/our-story" onClick={() => setIsMenuOpen(false)}>Our Story</Link>
+          <Link to="/contact" onClick={() => setIsMenuOpen(false)}>Contact</Link>
         </nav>
 
         <button 

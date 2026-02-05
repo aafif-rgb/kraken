@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import './Contact.css'
 import { EmailIcon, PhoneIcon, LocationIcon } from './icons'
 
-const Contact = () => {
+const Contact = ({ standalone = false }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -53,7 +53,7 @@ const Contact = () => {
 
   return (
     <section id="contact" className="contact" ref={contactRef}>
-      <div className="section-title-hero" aria-hidden="true">Contact</div>
+      {!standalone && <div className="section-title-hero" aria-hidden="true">Contact</div>}
       <div className="contact-container">
         <div className="section-header">
           <h2 className="section-title">Contact</h2>

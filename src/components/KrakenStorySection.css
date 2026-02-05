@@ -1,0 +1,127 @@
+.kraken-story {
+  position: relative;
+  padding: 100px 40px 120px;
+  overflow: hidden;
+}
+
+.kraken-story-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.kraken-story-gradient {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 20%, rgba(0, 20, 30, 0.6) 0%, transparent 50%),
+    radial-gradient(ellipse 100% 80% at 50% 100%, rgba(5, 15, 25, 0.8) 0%, transparent 50%),
+    linear-gradient(180deg, #0a0e14 0%, #050810 40%, #111 100%);
+}
+
+.kraken-story-depth {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(circle at 20% 80%, rgba(0, 150, 156, 0.03) 0%, transparent 25%),
+    radial-gradient(circle at 80% 20%, rgba(237, 48, 28, 0.02) 0%, transparent 20%);
+  pointer-events: none;
+}
+
+/* Subtle tentacle-like curves - decorative only */
+.kraken-story-tentacles {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 140px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 140'%3E%3Cpath d='M0 80 Q150 20 300 80 T600 80 T900 80 T1200 80 V140 H0 Z' fill='rgba(255,255,255,0.02)'/%3E%3Cpath d='M0 100 Q200 40 400 100 T800 100 T1200 100 V140 H0 Z' fill='rgba(255,255,255,0.015)'/%3E%3Cpath d='M0 120 Q180 60 360 120 T720 120 T1200 120 V140 H0 Z' fill='rgba(255,255,255,0.01)'/%3E%3C/svg%3E") no-repeat center bottom;
+  background-size: 100% 100%;
+  opacity: 0.8;
+}
+
+.kraken-story-container {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.kraken-story-title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 5vw, 42px);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 6px;
+  color: var(--text-primary);
+  margin-bottom: 24px;
+  text-shadow: 0 0 40px rgba(0, 150, 156, 0.15);
+}
+
+.kraken-story-lead {
+  font-family: var(--font-body);
+  font-size: clamp(17px, 2.2vw, 19px);
+  color: var(--text-primary);
+  line-height: 1.75;
+  margin-bottom: 28px;
+  font-weight: 500;
+}
+
+.kraken-story-body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--text-secondary);
+  line-height: 1.85;
+  margin-bottom: 40px;
+}
+
+.kraken-story-quote {
+  border-left: 3px solid var(--cinnabar);
+  padding-left: 24px;
+  margin: 0;
+}
+
+.kraken-story-quote-line {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(20px, 2.5vw, 24px);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-primary);
+  text-shadow: 0 0 30px var(--glow-cinnabar);
+}
+
+.kraken-story-quote-sub {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+  margin-top: 8px;
+}
+
+.kraken-story-divider {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.kraken-wave {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .kraken-story {
+    padding: 60px 20px 80px;
+  }
+
+  .kraken-story-title {
+    letter-spacing: 3px;
+  }
+}

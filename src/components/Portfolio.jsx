@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
 import './Portfolio.css'
 import TiltedCard from './TiltedCard'
 
-const Portfolio = () => {
+const Portfolio = ({ standalone = false, limit }) => {
   const portfolioRef = useRef(null)
   const [hoveredIndex, setHoveredIndex] = useState(null)
+  const isTeaser = typeof limit === 'number' && limit > 0
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -79,9 +81,11 @@ const Portfolio = () => {
     }
   ]
 
+  const displayItems = isTeaser ? portfolioItems.slice(0, limit) : portfolioItems
+
   return (
-    <section id="portfolio" className="portfolio" ref={portfolioRef}>
-      <div className="section-title-hero" aria-hidden="true">Portfolio</div>
+    <section id="portfolio" className={`portfolio ${isTeaser ? 'portfolio-teaser' : ''}`} ref={portfolioRef}>
+      {!standalone && !isTeaser && <div className="section-title-hero" aria-hidden="true">Portfolio</div>}
       <div className="portfolio-container">
         <div className="section-header">
           <h2 className="section-title">Portfolio</h2>
@@ -91,7 +95,7 @@ const Portfolio = () => {
         </div>
         <div className="section-content">
         <div className="portfolio-grid">
-          {portfolioItems.map((item, index) => (
+          {displayItems.map((item, index) => (
             <TiltedCard
               key={index}
               className="portfolio-item"
@@ -120,6 +124,11 @@ const Portfolio = () => {
             </TiltedCard>
           ))}
         </div>
+        {isTeaser && (
+          <div className="portfolio-teaser-cta">
+            <Link to="/portfolio" className="portfolio-teaser-link">View portfolio</Link>
+          </div>
+        )}
         </div>
       </div>
     </section>

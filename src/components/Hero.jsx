@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import './Hero.css'
 
 const DROPLET_COUNT = 22
@@ -6,6 +7,7 @@ const DROPLET_COUNT = 22
 const Hero = ({ isInHero }) => {
   const heroRef = useRef(null)
   const videoRef = useRef(null)
+  const navigate = useNavigate()
   const [showContent, setShowContent] = useState(false)
 
   const droplets = useMemo(() => {
@@ -96,11 +98,8 @@ const Hero = ({ isInHero }) => {
     }
   }, [])
 
-  const scrollToSection = (id) => {
-    const element = document.getElementById(id)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
-    }
+  const goTo = (path) => {
+    navigate(path)
   }
 
   return (
@@ -148,13 +147,13 @@ const Hero = ({ isInHero }) => {
         <div className="hero-buttons">
           <button 
             className="btn btn-primary"
-            onClick={() => scrollToSection('portfolio')}
+            onClick={() => goTo('/portfolio')}
           >
             View Work
           </button>
           <button 
             className="btn btn-secondary"
-            onClick={() => scrollToSection('contact')}
+            onClick={() => goTo('/contact')}
           >
             Contact
           </button>
