@@ -1,5 +1,13 @@
 import { Link } from 'react-router-dom'
+import { InstagramIcon, FacebookIcon, TikTokIcon } from './icons'
 import './Footer.css'
+
+// Update these URLs to your actual social media profile links
+const socialLinks = [
+  { label: 'Instagram', url: 'https://instagram.com', ariaLabel: 'Follow us on Instagram', Icon: InstagramIcon },
+  { label: 'Facebook', url: 'https://facebook.com', ariaLabel: 'Follow us on Facebook', Icon: FacebookIcon },
+  { label: 'TikTok', url: 'https://tiktok.com', ariaLabel: 'Follow us on TikTok', Icon: TikTokIcon },
+]
 
 const Footer = () => {
   const currentYear = new Date().getFullYear()
@@ -27,11 +35,23 @@ const Footer = () => {
           </div>
           <div className="footer-section">
             <h3 className="footer-title">Connect</h3>
-            <ul className="footer-links">
-              <li><a href="#" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-              <li><a href="#" target="_blank" rel="noopener noreferrer">YouTube</a></li>
-              <li><a href="#" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-              <li><a href="#" target="_blank" rel="noopener noreferrer">Vimeo</a></li>
+            <ul className="footer-social-list">
+              {socialLinks.map((item) => {
+                const Icon = item.Icon
+                return (
+                  <li key={item.label}>
+                    <a
+                      href={item.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={item.ariaLabel}
+                      className="footer-social-link"
+                    >
+                      <Icon className="footer-social-icon" />
+                    </a>
+                  </li>
+                )
+              })}
             </ul>
           </div>
         </div>

@@ -70,7 +70,35 @@
 .footer-links a:hover {
   color: var(--text-primary);
   transform: translateX(3px);
-  /* Minimal - no glow, subtle hover */
+}
+
+.footer-social-list {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+.footer-social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  color: var(--cinnabar);
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.footer-social-link:hover {
+  color: var(--text-primary);
+  transform: scale(1.1);
+}
+
+.footer-social-icon {
+  width: 24px;
+  height: 24px;
 }
 
 .footer-bottom {
